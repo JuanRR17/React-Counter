@@ -33,8 +33,14 @@ const Functionalities = props => {
         :
         <GrPause onClick={onClickToggleTimer}/>)
         }
+        {seconds!==0 ?
+        <span>
         <GrStop onClick={onClickStop}/>
         <GrRefresh onClick={onClickReset}/>
+        </span>
+        :
+        null      
+        }
     </div>
   )
 }
