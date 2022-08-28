@@ -1,6 +1,23 @@
 body{
     font-family: 'Prata', serif;
 }
+.functionalities{
+    font-size: 60px;
+    text-align: center;
+}
+
+.functionalities svg{
+    margin: 5px;
+    /* background-color:red; */
+    padding:10px;
+    border:5px solid grey;
+    border-radius: 30%;
+}
+.functionalities svg:hover{
+    cursor:pointer;
+    background-color: grey;
+}
+
 
 /* 
 

@@ -1,23 +1,34 @@
 import React, { useEffect, useState }  from "react";
 import SecondsCounter from "./SecondsCounter.jsx";
+import Functionalities from "./Functionalities.jsx";
 
 //create your first component
 const App = () => {
-	const [count, setCount] = useState(0);
+	const [seconds, setSeconds] = useState(0);
+    const [play, setPlay] = useState(false);
 
     useEffect(() => {
         var intervalID = setInterval(() => {
-			setCount(count => count + 1)
+            if(play)
+			setSeconds(seconds => seconds + 1)
         },1000);
         return () => {
             clearInterval(intervalID)
         }
-    }, [count]);
+    }, [play,seconds]);
 
-	return (
+	return (<div>
 		<SecondsCounter 
-			seconds={count}
+			seconds={seconds}
 		/>
+        <Functionalities 
+            seconds={seconds}
+            handleSetSeconds={(value)=>setSeconds(value)}
+            play={play}
+            handleSetPlay={(value)=>setPlay(value)}
+        />
+    </div>
+
 	);
 };
 
