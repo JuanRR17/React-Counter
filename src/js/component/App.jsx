@@ -1,6 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import SecondsCounter from "./SecondsCounter.jsx";
 import Functionalities from "./Functionalities.jsx";
+import Mode from "./Mode.jsx";
 
 //create your first component
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
     }, [play,seconds]);
 
 	return (<div>
+        <Mode />
 		<SecondsCounter 
 			seconds={seconds}
 		/>

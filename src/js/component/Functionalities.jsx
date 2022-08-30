@@ -45,6 +45,11 @@ const Functionalities = props => {
   )
 }
 
-Functionalities.propTypes = {}
+Functionalities.propTypes = {
+    handleSetPlay: PropTypes.func,
+    play: PropTypes.bool,
+    seconds: PropTypes.number,
+    handleSetSeconds: PropTypes.func
+}
 
 export default Functionalities
