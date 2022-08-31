@@ -7,6 +7,9 @@ import Mode from "./Mode.jsx";
 const App = () => {
 	const [seconds, setSeconds] = useState(0);
     const [play, setPlay] = useState(false);
+    const [mode, setMode] = useState(0);
+    const modes = ["Timer", "Countdown", "Alert"];
+    
 
     useEffect(() => {
         var intervalID = setInterval(() => {
@@ -19,7 +22,11 @@ const App = () => {
     }, [play,seconds]);
 
 	return (<div>
-        <Mode />
+        <Mode 
+            mode={mode}
+            modes={modes}
+            handleSetMode={(value)=>setMode(value)}
+        />
 		<SecondsCounter 
 			seconds={seconds}
 		/>
