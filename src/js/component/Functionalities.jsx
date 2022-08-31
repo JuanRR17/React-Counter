@@ -2,41 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {GrPause, GrPlay, GrResume, GrStop, GrRefresh } from 'react-icons/gr' 
 
-const Functionalities = props => {
-    const{
-        handleSetPlay,
-        play,
-        seconds,
-        handleSetSeconds
-    }=props;
-    const onClickToggleTimer = () =>{
-        handleSetPlay(!play)
-    }
+const Functionalities = ({
+    handleToggleTimer,
+    handleStopFunc,
+    handleResetFunc,
+    handleToggleFunctions,
+    play
+}) => {
 
-    const onClickStop = ()=>{
-        handleSetSeconds(0)
-        handleSetPlay(false)
-    }
-
-    const onClickReset = () =>{
-        handleSetSeconds(0)
-        handleSetPlay(true)
-    }
 
   return (
     <div className='functionalities '>
-        {seconds===0 ?
-            <GrPlay onClick={onClickToggleTimer}/>
+        {handleToggleFunctions ?
+            <GrPlay onClick={handleToggleTimer}/>
         :
         (!play ? 
-        <GrResume onClick={onClickToggleTimer}/>
+        <GrResume onClick={handleToggleTimer}/>
         :
-        <GrPause onClick={onClickToggleTimer}/>)
+        <GrPause onClick={handleToggleTimer}/>)
         }
-        {seconds!==0 ?
+        {!handleToggleFunctions ?
         <span>
-        <GrStop onClick={onClickStop}/>
-        <GrRefresh onClick={onClickReset}/>
+        <GrStop onClick={handleStopFunc}/>
+        <GrRefresh onClick={handleResetFunc}/>
         </span>
         :
         null      

@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import ClockIcon from './ClockIcon.jsx';
 import Counter from './Counter.jsx';
 import { getSecondsArray } from '../utils.js';
+import Functionalities from './Functionalities.jsx';
 
-const SecondsCounter = ({seconds}) => {
+const SecondsCounter = (props) => {
+	const [seconds, setSeconds] = useState(0);
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    var intervalID = setInterval(() => {
+        if(play)
+  setSeconds(seconds => seconds + 1)
+    },1000);
+    return () => {
+        clearInterval(intervalID)
+    }
+}, [play,seconds]);
+
+  const onClickToggleTimer = () =>{
+    setPlay(!play)
+  }
+
+  const onClickStop = ()=>{
+    setSeconds(0)
+    setPlay(false)
+  }
+
+  const onClickReset = () =>{
+    setSeconds(0)
+    setPlay(true)
+  }
 
   const secondsArray = getSecondsArray(seconds);
   const style ={
@@ -19,9 +46,15 @@ const SecondsCounter = ({seconds}) => {
         {secondsArray.map((_,idx) => {
           return <Counter key={idx} seconds={secondsArray[idx]}/>
         })}
-      </span>
+        </span>
+        <Functionalities 
+            handleToggleTimer={onClickToggleTimer}
+            handleStopFunc={onClickStop}
+            handleResetFunc={onClickReset}
+            handleToggleFunctions={seconds===0 ? true : false}
+            play={play}
+        />
     </div>
-
   )
 }
 
