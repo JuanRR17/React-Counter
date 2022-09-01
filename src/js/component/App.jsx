@@ -1,20 +1,19 @@
 import React, { useState }  from "react";
-import SecondsCounter from "./SecondsCounter.jsx";
-import Mode from "./Mode.jsx";
 import Countdown from "./Countdown.jsx";
+import Mode from "./Mode.jsx";
+import SecondsCounter from "./SecondsCounter.jsx";
+
 
 //create your first component
 const App = () => {
     const [mode, setMode] = useState();
-    console.log("mode",mode)
-	return (<div>
+	return (<div className='text-center'>
         <Mode 
             mode={mode}
             handleSetMode={(value)=>setMode(value)}
         />
-        {mode === "Timer" ? <SecondsCounter /> : ""}
+        {mode === "Timer" || mode === "Alert" ? <SecondsCounter alert={mode==="Alert" ? true : false} /> : ""}
         {mode === "Countdown" ? <Countdown /> : ""}
-
     </div>
 
 	);

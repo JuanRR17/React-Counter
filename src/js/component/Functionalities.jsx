@@ -34,10 +34,11 @@ const Functionalities = ({
 }
 
 Functionalities.propTypes = {
-    handleSetPlay: PropTypes.func,
+    handleToggleTimer: PropTypes.func,
+    handleStopFunc: PropTypes.func,
+    handleResetFunc: PropTypes.func,
+    handleToggleFunctions: PropTypes.bool,
     play: PropTypes.bool,
-    seconds: PropTypes.number,
-    handleSetSeconds: PropTypes.func
 }
 
 export default Functionalities

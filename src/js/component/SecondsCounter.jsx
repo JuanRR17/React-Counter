@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import ClockIcon from './ClockIcon.jsx';
-import Counter from './Counter.jsx';
 import { getSecondsArray } from '../utils.js';
 import Functionalities from './Functionalities.jsx';
+import SecondsRenderer from './SecondsRenderer.jsx';
+import UserInput from './UserInput.jsx';
 
-const SecondsCounter = (props) => {
+const SecondsCounter = ({alert}) => {
 	const [seconds, setSeconds] = useState(0);
   const [play, setPlay] = useState(false);
+  const [alertTime, setAlertTime] = useState();
 
   useEffect(() => {
     var intervalID = setInterval(() => {
-        if(play)
-  setSeconds(seconds => seconds + 1)
-    },1000);
+        if(play){
+          setSeconds(seconds => seconds + 1)
+          if(seconds === alertTime){
+            window.alert('Time\'s up!')
+            onClickStop()
+          }
+    }},1000);
     return () => {
         clearInterval(intervalID)
     }
@@ -34,32 +39,40 @@ const SecondsCounter = (props) => {
   }
 
   const secondsArray = getSecondsArray(seconds);
-  const style ={
-    width:"fit-content",
-    margin: "auto"
+  if(seconds === alertTime && play){
+    window.alert(`Time\'s up! \n You\'ve reached ${seconds} seconds! `)
+    onClickStop()
+  }
+
+  const style = {
+      width: "6em",
+      textAlign: "right"
   }
 
   return (
-    <div className='text-center'>
-      <span style={style} className = "p-3 bg-dark d-flex justify-content-evenly flex-wrap">
-        <ClockIcon />
-        {secondsArray.map((_,idx) => {
-          return <Counter key={idx} seconds={secondsArray[idx]}/>
-        })}
-        </span>
-        <Functionalities 
-            handleToggleTimer={onClickToggleTimer}
-            handleStopFunc={onClickStop}
-            handleResetFunc={onClickReset}
-            handleToggleFunctions={seconds===0 ? true : false}
-            play={play}
-        />
+    <div>
+      {alert ? 
+        <UserInput 
+        label="Set Alert"
+        onChangeHandler={event => setAlertTime(Number(event.target.value))}
+      />
+      :
+      ""
+      }
+      <SecondsRenderer secondsArray={secondsArray} />
+      <Functionalities 
+          handleToggleTimer={onClickToggleTimer}
+          handleStopFunc={onClickStop}
+          handleResetFunc={onClickReset}
+          handleToggleFunctions={seconds===0 ? true : false}
+          play={play}
+      />
     </div>
   )
 }
 
 SecondsCounter.propTypes = {
-  seconds : PropTypes.number
+  alert: PropTypes.bool
 }
 
 export default SecondsCounter

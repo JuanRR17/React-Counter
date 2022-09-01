@@ -7,10 +7,9 @@ const Mode = ({mode, handleSetMode}) => {
   function handleSelectChange(event) {
     handleSetMode(event.target.value);
   }
-  // console.log("modeName", modes[mode]);
-  // console.log("mode", mode)
+  
   return (
-  <div className='text-center'>
+  <div>
     Select Mode:
     <select onChange={handleSelectChange} value={mode} name="mode" className="m-2">
         <option >Select Mode</option>
@@ -25,7 +24,6 @@ const Mode = ({mode, handleSetMode}) => {
 
 Mode.propTypes = {
   mode: PropTypes.string,
-  // modes: PropTypes.array,
   handleSetMode: PropTypes.func
 }
 

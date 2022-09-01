@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-const Counter= (props)=>{
-    const{seconds} = props;
-
+const Counter= ({seconds})=>{
     const styleCounter={
         width: "80px",
         height: "120px",
