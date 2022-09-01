@@ -9,3 +9,17 @@ export const getSecondsArray = (seconds) =>{
 
     return array.reverse()
   }
+
+  export const onClickToggleTimer = (play) =>{
+    setPlay(!play)
+  }
+
+  export const onClickStop = ()=>{
+    setSeconds(0)
+    setPlay(false)
+  }
+
+  export const onClickReset = (resetValue) =>{
+    setSeconds(resetValue)
+    setPlay(true)
+  }
